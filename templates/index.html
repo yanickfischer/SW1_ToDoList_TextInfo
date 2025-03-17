@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Text Processing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-3">To-Do List with Text Processing</h2>
+
+        <form action="{{ url_for('index') }}" method="post" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="task" class="form-control" placeholder="Enter a task..." required>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </div>
+        </form>
+
+        <ul class="list-group">
+            {% for task in tasks %}
+                <li class="list-group-item d-flex justify-content-between">
+                    {{ task }}
+                    <a href="{{ url_for('delete_task', task_id=loop.index0) }}" class="btn btn-danger btn-sm">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if processed_text %}
+        <div class="mt-4 p-3 border rounded bg-light">
+            <h4>Processed Text Result</h4>
+            <p><strong>Original:</strong> {{ processed_text.original }}</p>
+            <p><strong>Reversed:</strong> {{ processed_text.reversed }}</p>
+            <p><strong>Word Count:</strong> {{ processed_text.word_count }}</p>
+            <p><strong>Character Count:</strong> {{ processed_text.char_count }}</p>
+            <p><strong>Palindrome:</strong> {{ processed_text.palindrome }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
