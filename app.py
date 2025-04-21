@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import re
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/templates', static_folder='templates')
 
 tasks = []
 
